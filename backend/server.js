@@ -27,14 +27,14 @@ app.post("/send-email", upload.single("document"), async (req, res) => {
         port: 465,
         secure: true,
         auth: {
-          user: 'va8687577@gmail.com',
+          user: 'Email Address',
           pass: 'Your App password',
         },
       });
 
     const mailOptions = {
       from: email,
-      to: "va8687577@gmail.com", // Replace with the company's email
+      to: "Email Address", // Replace with the company's email
       subject: `Contact Form Submission: ${subject}`,
       text: `You have a new contact form submission from ${name} (${email}):\n\n${message}`,
       attachments: file
