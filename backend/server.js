@@ -28,7 +28,7 @@ app.post("/send-email", upload.single("document"), async (req, res) => {
         secure: true,
         auth: {
           user: 'va8687577@gmail.com',
-          pass: 'sxmk qthy delu vldf',
+          pass: 'Your App password',
         },
       });
 
