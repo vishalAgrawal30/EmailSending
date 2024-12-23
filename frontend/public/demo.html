@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Sidebar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Sidebar Styling */
+        .sidebar {
+            transition: width 0.3s ease, opacity 0.3s ease;
+            width: 240px; /* Default expanded width */
+            height: 100vh;
+            background: linear-gradient(to bottom, #1e40af, #2563eb);
+            position: relative;
+            overflow: hidden;
+        }
+        .sidebar.collapsed {
+            width: 64px; /* Collapsed width */
+        }
+
+        .sidebar .sidebar-item {
+            opacity: 0;
+            padding: 16px;
+            text-align: left;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar.collapsed .sidebar-item {
+            opacity: 1; /* Make the items visible when sidebar is expanded */
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            text-white
+        }
+
+        .sidebar-item i {
+            width: 20px;
+            margin-right: 16px;
+        }
+
+        .sidebar-item span {
+            display: none;
+        }
+
+        .sidebar.collapsed .sidebar-item span {
+            display: inline-block; /* Display text when sidebar is expanded */
+        }
+
+        /* Button to toggle the sidebar */
+        .toggle-btn {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            background-color: #2563eb;
+            color: white;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .toggle-btn i {
+            font-size: 18px;
+        }
+
+        /* Content area adjustment */
+        .main-content {
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar.collapsed ~ .main-content {
+            margin-left: 64px;
+        }
+
+        .main-content {
+            margin-left: 240px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="flex">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar h-screen bg-gradient-to-b from-blue-600 to-blue-800 shadow-lg text-white flex flex-col">
+            <div class="flex items-center justify-center h-20 border-b border-blue-500">
+                <h1 class="text-2xl font-bold">MyApp</h1>
+            </div>
+            <div class="flex-grow">
+                <button class="sidebar-item w-full hover:bg-blue-700 focus:outline-none">
+                    <i class="fa fa-home w-6 h-6"></i>
+                    <span>Home</span>
+                </button>
+                <button class="sidebar-item w-full hover:bg-blue-700 focus:outline-none">
+                    <i class="fa fa-chart-bar w-6 h-6"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="sidebar-item w-full hover:bg-blue-700 focus:outline-none">
+                    <i class="fa fa-user w-6 h-6"></i>
+                    <span>Profile</span>
+                </button>
+                <button class="sidebar-item w-full hover:bg-blue-700 focus:outline-none">
+                    <i class="fa fa-cog w-6 h-6"></i>
+                    <span>Settings</span>
+                </button>
+                <button class="sidebar-item w-full hover:bg-blue-700 focus:outline-none">
+                    <i class="fa fa-sign-out-alt w-6 h-6"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+            <div class="p-4 border-t border-blue-500 text-sm">
+                <p>&copy; 2024 MyApp. All rights reserved.</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" class="main-content flex-grow p-8">
+            <h1 class="text-3xl font-bold">Welcome to MyApp</h1>
+            <p class="mt-4 text-gray-700">Select an option from the sidebar to get started.</p>
+        </div>
+    </div>
+
+    <!-- Button to toggle sidebar -->
+    <div id="toggleBtn" class="toggle-btn">
+        <i id="toggleIcon" class="fa fa-chevron-left"></i>
+    </div>
+
+    <script>
+        // JavaScript to toggle sidebar collapse/expand
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            
+            // Change icon depending on the state
+            if (sidebar.classList.contains('collapsed')) {
+                toggleIcon.classList.remove('fa-chevron-left');
+                toggleIcon.classList.add('fa-chevron-right');
+            } else {
+                toggleIcon.classList.remove('fa-chevron-right');
+                toggleIcon.classList.add('fa-chevron-left');
+            }
+        });
+    </script>
+
+</body>
+</html>
